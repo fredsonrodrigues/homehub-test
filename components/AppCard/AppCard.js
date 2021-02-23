@@ -33,10 +33,12 @@ export default function AppCard({ full, breed }) {
 
   return (
     <>
-      <Head>
-        <title>{breed.name} | DogHub - Find your dog!</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      {full && (
+        <Head>
+          <title>{breed.name} | DogHub - Find your dog!</title>
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
+      )}
       <Card className={classes.root}>
         <CardActionArea onClick={() => router.push({
           pathname: '/[pid]',
@@ -90,10 +92,6 @@ export default function AppCard({ full, breed }) {
 }
 
 AppCard.propTypes = {
-  children: PropTypes.oneOfType([
-      PropTypes.arrayOf(PropTypes.node),
-      PropTypes.node
-  ]).isRequired,
   full: PropTypes.boolean,
   breed: PropTypes.shape({
     id: PropTypes.integer,
