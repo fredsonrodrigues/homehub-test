@@ -2,13 +2,7 @@ import React from 'react';
 import Head from 'next/head'
 import PropTypes from 'prop-types'
 import { makeStyles } from '@material-ui/core/styles';
-import { Card, Button } from '@material-ui/core';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import Chip from '@material-ui/core/Chip';
-import Typography from '@material-ui/core/Typography';
+import { Card, Button, CardActionArea, CardActions, CardContent, CardMedia, Chip, Typography } from '@material-ui/core';
 import { useRouter } from 'next/router'
 
 const useStyles = makeStyles({

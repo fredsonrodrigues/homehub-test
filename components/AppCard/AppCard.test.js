@@ -1,4 +1,5 @@
-import { render, fireEvent } from '@testing-library/react'
+import React from 'react';
+import { render } from '@testing-library/react'
 import AppCard from './AppCard'
 import breed from '../../mocks/81.json'
 
