@@ -9,18 +9,31 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "test": "jest"
+    "test": "jest",
+    "lint": "eslint",
+    "lint:fix": "eslint --fix ."
   },
   "dependencies": {
+    "@emotion/cache": "latest",
+    "@emotion/react": "latest",
+    "@emotion/server": "latest",
+    "@emotion/styled": "latest",
+    "@material-ui/core": "^4.11.3",
+    "@material-ui/icons": "^4.11.2",
+    "add": "^2.0.6",
     "next": "10.0.7",
     "react": "17.0.1",
-    "react-dom": "17.0.1"
+    "react-dom": "17.0.1",
+    "swr": "^0.4.2",
+    "yarn": "^1.22.10"
   },
   "devDependencies": {
     "@testing-library/dom": "^7.29.6",
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
     "babel-jest": "^26.6.3",
+    "eslint": "^7.20.0",
+    "eslint-plugin-react": "^7.22.0",
     "jest": "^26.6.3",
     "jest-dom": "^4.0.0",
     "node-mocks-http": "^1.10.1"

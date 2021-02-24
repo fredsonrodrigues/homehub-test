@@ -29,13 +29,13 @@ describe('testing API /breeds/', () => {
   }
 
   test('returns a correctly breeds length', async () => {
-    const { req, res } = await setup();
+    const { res } = await setup();
     expect(res._getStatusCode()).toBe(200);
     expect(JSON.parse(res._getData())).toHaveLength(4);
   });
 
   test('returns the first specified breed correctly', async () => {
-    const { req, res } = await setup();
+    const { res } = await setup();
     expect(res._getStatusCode()).toBe(200);
     expect(JSON.parse(res._getData())[0]).toEqual(
       expect.objectContaining({
@@ -45,7 +45,7 @@ describe('testing API /breeds/', () => {
   });
 
   test('returns the selected breed correctly', async () => {
-    const { req, res } = await setupOneBreed({ query: { pid: 121 }});
+    const { res } = await setupOneBreed({ query: { pid: 121 }});
     expect(res._getStatusCode()).toBe(200);
     expect(JSON.parse(res._getData())).toEqual(
       expect.objectContaining({
