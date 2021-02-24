@@ -21,9 +21,22 @@ const useStyles = makeStyles({
   }
 });
 
-export default function AppCard({ full, breed }) {
+export default function AppCard({ full, breed, onSubmitAdopt }) {
   const classes = useStyles();
-  const router = useRouter()
+  const router = useRouter();
+
+  const onSubmitAdoptBreed = () => {
+    onSubmitAdopt(breed);
+  }
+
+  const onCardAction = () => {
+    if (!full) {
+      router.push({
+        pathname: '/[pid]',
+        query: { pid: breed.id }
+      })
+    }
+  }
 
   return (
     <>
@@ -34,10 +47,7 @@ export default function AppCard({ full, breed }) {
         </Head>
       )}
       <Card className={classes.root}>
-        <CardActionArea onClick={() => router.push({
-          pathname: '/[pid]',
-          query: { pid: breed.id }
-        })}>
+        <CardActionArea onClick={onCardAction}>
           <CardMedia
             component="img"
             alt={breed.name}
@@ -74,7 +84,7 @@ export default function AppCard({ full, breed }) {
               </ul>
             </CardContent>
             <CardActions>
-              <Button data-testid="app-card-adopt-button" variant="contained" color="primary" className={classes.buttonAdopt} size="large">
+              <Button onClick={onSubmitAdoptBreed} data-testid="app-card-adopt-button" variant="contained" color="primary" className={classes.buttonAdopt} size="large">
                 <strong>ADOPT</strong>
               </Button>
             </CardActions>
@@ -86,7 +96,7 @@ export default function AppCard({ full, breed }) {
 }
 
 AppCard.propTypes = {
-  full: PropTypes.boolean,
+  full: PropTypes.bool,
   breed: PropTypes.shape({
     id: PropTypes.integer,
     name: PropTypes.string,
@@ -102,7 +112,8 @@ AppCard.propTypes = {
       imperial: PropTypes.string,
       metric: PropTypes.string,
     })
-  })
+  }),
+  onSubmitAdopt: PropTypes.func
 }
 
 AppCard.defaultProps = {
@@ -121,5 +132,6 @@ AppCard.defaultProps = {
       imperial: null,
       metric: null,
     },
-  }
+  },
+  onSubmitAdopt: () => {}
 }
