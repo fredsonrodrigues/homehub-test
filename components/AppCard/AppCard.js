@@ -52,19 +52,19 @@ export default function AppCard({ full, breed }) {
             title={breed.name}
           />
           <CardContent>
-            <Typography gutterBottom variant="h5" component="h5">
+            <Typography data-testid="app-card-title" gutterBottom variant="h5" component="h5">
               <strong>{breed.name}</strong>
             </Typography>
           </CardContent>
           <CardActions className={classes.cardActions}>
             {breed.temperament.split(", ").map((el, key) =>
-              <Chip className={classes.chipTemperament} label={el} key={key} variant="outlined" />
+              <Chip data-testid="app-card-chips" className={classes.chipTemperament} label={el} key={key} variant="outlined" />
             )}
           </CardActions>
         </CardActionArea>
         {full && (
           <>
-            <CardContent>
+            <CardContent data-testid="app-card-details">
               <p>Life span: {breed.life_span}</p>
               <p>Bred for: {breed.bred_for}</p>
               <p>Breed group: {breed.breed_group}</p>
@@ -80,7 +80,7 @@ export default function AppCard({ full, breed }) {
               </ul>
             </CardContent>
             <CardActions>
-              <Button variant="contained" color="primary" className={classes.buttonAdopt} size="large">
+              <Button data-testid="app-card-adopt-button" variant="contained" color="primary" className={classes.buttonAdopt} size="large">
                 <strong>ADOPT</strong>
               </Button>
             </CardActions>
@@ -96,7 +96,7 @@ AppCard.propTypes = {
   breed: PropTypes.shape({
     id: PropTypes.integer,
     name: PropTypes.string,
-    temperament: PropTypes.array,
+    temperament: PropTypes.string,
     life_span: PropTypes.string,
     bred_for: PropTypes.string,
     breed_group: PropTypes.string,
@@ -109,4 +109,23 @@ AppCard.propTypes = {
       metric: PropTypes.string,
     })
   })
+}
+
+AppCard.defaultProps = {
+  full: false,
+  breed: {
+    name: null,
+    temperament: null,
+    life_span: null,
+    bred_for: null,
+    breed_group: null,
+    weight: {
+      imperial: null,
+      metric: null,
+    },
+    height: {
+      imperial: null,
+      metric: null,
+    },
+  }
 }

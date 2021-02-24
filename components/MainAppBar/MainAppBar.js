@@ -22,7 +22,7 @@ export default function MainAppBar() {
         <AppBar>
             <Toolbar>
                 <Link href="/">
-                    <Typography variant="h5" className={classes.title}>
+                    <Typography data-testid="app-mainappbar-title" variant="h5" className={classes.title}>
                         DOG<strong>HUB</strong>
                     </Typography>
                 </Link>
