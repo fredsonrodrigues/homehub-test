@@ -7,7 +7,7 @@ import breed from '../../mocks/6.json'
 jest.mock('next/router', () => ({
     useRouter: () => ({
         query: {
-            pid: 6
+            pid: "6"
         },
     }),
 }));
