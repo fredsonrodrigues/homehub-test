@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from '@testing-library/react'
+import { render, fireEvent } from '@testing-library/react'
 import Breed from '../../pages/[pid]'
 import useSWR from 'swr'
 import breed from '../../mocks/6.json'
@@ -18,6 +18,13 @@ useSWR.mockImplementation(() => ({
     error: null
 }))
 
+const mockSetStorage = jest.fn();
+jest.mock('../../hooks/useStorage', () => ({
+    useStorage: jest.fn().mockImplementation(() => ({
+        setStorage: mockSetStorage
+    }))
+}));
+
 describe('testing pages - Index', () => {
     const setup = (props) => {
         const utils = render(<Breed {...props} />)
@@ -29,5 +36,13 @@ describe('testing pages - Index', () => {
         expect(queryAllByTestId("app-card-title")).toHaveLength(1);
         expect(getByTestId("app-card-title")).toHaveTextContent("Akita");
         expect(queryByTestId("app-card-details")).toBeTruthy();
+    });
+
+    test('returns right action when click adopt button', async () => {
+        const { getByTestId } = setup();
+        const elementToClick = getByTestId("app-card-adopt-button");
+        fireEvent.click(elementToClick);
+        expect(mockSetStorage).toHaveBeenCalledTimes(1);
+        expect(mockSetStorage).toHaveBeenCalledWith(breed);
     });
 })
