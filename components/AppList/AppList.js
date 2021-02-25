@@ -6,8 +6,9 @@ import DeleteIcon from '@material-ui/icons/Delete';
 
 const useStyles = makeStyles((theme) => ({
     listItem: {
-      borderStyle: "ridge",
-      margin: "10px"
+      borderRadius: "12px",
+      margin: "10px",
+      boxShadow: "0px 2px 4px -1px rgb(0 0 0 / 29%), 0px 4px 5px 0px rgb(0 0 0 / 35%), 0px 1px 10px 0px rgb(0 0 0 / 28%)"
     },
     small: {
       width: theme.spacing(3),
@@ -34,7 +35,7 @@ export default function AppList ({id, name, orderKey, removeAction}) {
             </ListItemAvatar>
             <ListItemText
                 data-testid="app-list-name"
-                primary={name}
+                primary={<strong>{name}</strong>}
                 secondary={null}
             />
             <ListItemSecondaryAction data-testid="app-list-action" onClick={() => removeAction(orderKey)}>

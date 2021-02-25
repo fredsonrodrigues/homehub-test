@@ -25,9 +25,12 @@ export const useStorage = (key) => {
         setList(newList);
     }
 
+    const showCount = () => list.length
+
     return {
         currentStorage: list,
         setStorage,
-        removeStorage
+        removeStorage,
+        showCount
     };
 }

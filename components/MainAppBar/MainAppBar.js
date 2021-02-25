@@ -4,6 +4,7 @@ import { AppBar, Typography, IconButton, Toolbar, Badge } from '@material-ui/cor
 import { Storefront } from '@material-ui/icons';
 import { useRouter } from 'next/router';
 import Link from 'next/link'
+import { useStorage } from '../../hooks/useStorage';
 
 const useStyles = makeStyles(() => ({
     title: {
@@ -14,6 +15,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 export default function MainAppBar() {
+    const { showCount } = useStorage("breeds");
     const classes = useStyles();
     const router = useRouter();
     const handleMenu = () => router.push(`/adopt-list`);
@@ -35,7 +37,7 @@ export default function MainAppBar() {
                         onClick={handleMenu}
                         color="inherit"
                     >
-                        <Badge badgeContent={0} color="secondary">
+                        <Badge badgeContent={showCount()} color="secondary">
                             <Storefront />
                         </Badge>
                     </IconButton>
