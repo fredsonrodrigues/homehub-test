@@ -4,11 +4,13 @@ import PropTypes from 'prop-types'
 import { makeStyles } from '@material-ui/core/styles';
 import { Card, Button, CardActionArea, CardActions, CardContent, CardMedia, Chip, Typography } from '@material-ui/core';
 import { useRouter } from 'next/router'
+import theme from "../Theme";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(({
   root: {
     maxWidth: 345,
-    margin: '15px'
+    margin: '15px',
+    boxShadow: "0px 2px 4px -1px rgb(0 0 0 / 29%), 0px 4px 5px 0px rgb(0 0 0 / 35%), 0px 1px 10px 0px rgb(0 0 0 / 28%)"
   },
   cardActions: {
     display: 'initial'
@@ -18,12 +20,28 @@ const useStyles = makeStyles({
   },
   chipTemperament: {
     marginBottom: '2%'
+  },
+  title: {
+    color: theme.palette.titlePrimary.main
   }
-});
+}));
 
-export default function AppCard({ full, breed }) {
+export default function AppCard({ full, breed, onSubmitAdopt }) {
   const classes = useStyles();
-  const router = useRouter()
+  const router = useRouter();
+
+  const onSubmitAdoptBreed = () => {
+    onSubmitAdopt(breed);
+  }
+
+  const onCardAction = () => {
+    if (!full) {
+      router.push({
+        pathname: '/[pid]',
+        query: { pid: breed.id }
+      })
+    }
+  }
 
   return (
     <>
@@ -34,10 +52,7 @@ export default function AppCard({ full, breed }) {
         </Head>
       )}
       <Card className={classes.root}>
-        <CardActionArea onClick={() => router.push({
-          pathname: '/[pid]',
-          query: { pid: breed.id }
-        })}>
+        <CardActionArea data-testid="app-card-action" onClick={onCardAction}>
           <CardMedia
             component="img"
             alt={breed.name}
@@ -46,7 +61,7 @@ export default function AppCard({ full, breed }) {
             title={breed.name}
           />
           <CardContent>
-            <Typography data-testid="app-card-title" gutterBottom variant="h5" component="h5">
+            <Typography className={classes.title} data-testid="app-card-title" gutterBottom variant="h5" component="h5">
               <strong>{breed.name}</strong>
             </Typography>
           </CardContent>
@@ -74,7 +89,7 @@ export default function AppCard({ full, breed }) {
               </ul>
             </CardContent>
             <CardActions>
-              <Button data-testid="app-card-adopt-button" variant="contained" color="primary" className={classes.buttonAdopt} size="large">
+              <Button onClick={onSubmitAdoptBreed} data-testid="app-card-adopt-button" variant="contained" color="primary" className={classes.buttonAdopt} size="large">
                 <strong>ADOPT</strong>
               </Button>
             </CardActions>
@@ -86,7 +101,7 @@ export default function AppCard({ full, breed }) {
 }
 
 AppCard.propTypes = {
-  full: PropTypes.boolean,
+  full: PropTypes.bool,
   breed: PropTypes.shape({
     id: PropTypes.integer,
     name: PropTypes.string,
@@ -102,7 +117,8 @@ AppCard.propTypes = {
       imperial: PropTypes.string,
       metric: PropTypes.string,
     })
-  })
+  }),
+  onSubmitAdopt: PropTypes.func
 }
 
 AppCard.defaultProps = {
@@ -121,5 +137,6 @@ AppCard.defaultProps = {
       imperial: null,
       metric: null,
     },
-  }
+  },
+  onSubmitAdopt: () => { }
 }
