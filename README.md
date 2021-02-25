@@ -19,4 +19,11 @@ yarn build && yarn start
 
 # para rodar em ambiente de desenvolvimento, basta rodar:
 yarn dev
+
+# para rodar os testes
+yarn test
+
+# Depois que alterar aquivos, o lint indicará como melhorar o código
+yar lint:fix
+
 ```
