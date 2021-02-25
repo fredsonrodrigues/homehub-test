@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import { AppBar, Typography, IconButton, Toolbar, Badge } from '@material-ui/core';
 import { Storefront } from '@material-ui/icons';
@@ -14,11 +15,13 @@ const useStyles = makeStyles(() => ({
     }
 }));
 
-export default function MainAppBar() {
-    const { showCount } = useStorage("breeds");
+export default function MainAppBar(props) {
+    const { currentStorage } = useStorage("breeds");
     const classes = useStyles();
     const router = useRouter();
     const handleMenu = () => router.push(`/adopt-list`);
+
+    useEffect(() => props.dispatch({ type: 'set-initial', val: currentStorage.length }), [currentStorage.length]);
 
     return (
         <AppBar>
@@ -37,7 +40,7 @@ export default function MainAppBar() {
                         onClick={handleMenu}
                         color="inherit"
                     >
-                        <Badge badgeContent={showCount()} color="secondary">
+                        <Badge badgeContent={props.state.count} color="error">
                             <Storefront />
                         </Badge>
                     </IconButton>
@@ -45,4 +48,11 @@ export default function MainAppBar() {
             </Toolbar>
         </AppBar>
     );
+}
+
+MainAppBar.propTypes = {
+    state: PropTypes.shape({
+        count: PropTypes.number
+    }),
+    dispatch: PropTypes.func
 }

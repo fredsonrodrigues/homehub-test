@@ -11,6 +11,13 @@ jest.mock('next/router', () => ({
 
 describe('testing MainAppBar Component', () => {
     const setup = (props) => {
+        props = {
+            dispatch: jest.fn(),
+            state: {
+                count: 0
+            },
+            ...props
+        }
         const utils = render(<MainAppBar {...props}/>)
         return utils
     }

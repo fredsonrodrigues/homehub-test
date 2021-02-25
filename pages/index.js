@@ -7,6 +7,8 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import { makeStyles } from '@material-ui/core/styles';
 import { fetcher } from '../services';
 import { Typography } from '@material-ui/core';
+import theme from "../components/Theme";
+
 
 const BreedList = () => {
   const { data, error } = useSWR('/api/breeds/', fetcher);
@@ -19,7 +21,7 @@ const BreedList = () => {
   return data.map((e, key) => <AppCard key={key} breed={e} />);
 }
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(({
   title: {
     color: theme.palette.titlePrimary.main,
     marginBottom: "5px"

@@ -7,7 +7,8 @@ import { CacheProvider } from '@emotion/react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import createCache from '@emotion/cache';
 import theme from '../components/Theme';
-
+import { useReducer } from "react";
+import { initialState, reducer } from "../hooks/useReducer";
 export const cache = createCache({ key: 'css', prepend: true });
 
 export default function MyApp(props) {
@@ -20,6 +21,8 @@ export default function MyApp(props) {
     }
   }, []);
 
+  const [state, dispatch] = useReducer(reducer, initialState);
+
   return (
     <CacheProvider value={cache}>
       <Head>
@@ -27,9 +30,9 @@ export default function MyApp(props) {
         <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
       <ThemeProvider theme={theme}>
-        <MainAppBar />
+        <MainAppBar state={state} dispatch={dispatch} />
         <CssBaseline />
-        <Component {...pageProps} />
+        <Component {...pageProps} state={state} dispatch={dispatch} />
       </ThemeProvider>
     </CacheProvider>
   );

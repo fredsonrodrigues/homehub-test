@@ -4,8 +4,6 @@ import AdoptList from '../../pages/adopt-list'
 import useSWR from 'swr'
 import breeds from '../../mocks/breeds.json'
 
-let urlCalled = null;
-
 jest.mock('swr', () => jest.fn());
 useSWR.mockImplementation(() => ({
     data: breeds,
@@ -32,6 +30,13 @@ jest.mock('../../hooks/useStorage', () => ({
 
 describe('testing pages - Index', () => {
     const setup = (props) => {
+        props = {
+            dispatch: jest.fn(),
+            state: {
+                count: 0
+            },
+            ...props
+        }
         const utils = render(<AdoptList {...props} />)
         return utils
     }

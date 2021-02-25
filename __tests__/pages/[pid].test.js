@@ -27,6 +27,13 @@ jest.mock('../../hooks/useStorage', () => ({
 
 describe('testing pages - Index', () => {
     const setup = (props) => {
+        props = {
+            dispatch: jest.fn(),
+            state: {
+                count: 0
+            },
+            ...props
+        }
         const utils = render(<Breed {...props} />)
         return utils
     }

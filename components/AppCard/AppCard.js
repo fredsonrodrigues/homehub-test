@@ -4,8 +4,9 @@ import PropTypes from 'prop-types'
 import { makeStyles } from '@material-ui/core/styles';
 import { Card, Button, CardActionArea, CardActions, CardContent, CardMedia, Chip, Typography } from '@material-ui/core';
 import { useRouter } from 'next/router'
+import theme from "../Theme";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(({
   root: {
     maxWidth: 345,
     margin: '15px',
@@ -137,5 +138,5 @@ AppCard.defaultProps = {
       metric: null,
     },
   },
-  onSubmitAdopt: () => {}
+  onSubmitAdopt: () => { }
 }
