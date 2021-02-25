@@ -47,7 +47,7 @@ export default function AppCard({ full, breed, onSubmitAdopt }) {
         </Head>
       )}
       <Card className={classes.root}>
-        <CardActionArea onClick={onCardAction}>
+        <CardActionArea data-testid="app-card-action" onClick={onCardAction}>
           <CardMedia
             component="img"
             alt={breed.name}

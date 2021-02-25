@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
 export default function AppList ({id, name, orderKey, removeAction}) {
     const classes = useStyles();
     return (
-        <ListItem className={classes.listItem} key={orderKey}>
+        <ListItem data-testid="app-list-item" className={classes.listItem} key={orderKey}>
             <ListItemAvatar>
                 <Avatar
                     variant="square"
@@ -33,10 +33,11 @@ export default function AppList ({id, name, orderKey, removeAction}) {
                 />
             </ListItemAvatar>
             <ListItemText
+                data-testid="app-list-name"
                 primary={name}
                 secondary={null}
             />
-            <ListItemSecondaryAction onClick={() => removeAction(orderKey)}>
+            <ListItemSecondaryAction data-testid="app-list-action" onClick={() => removeAction(orderKey)}>
                 <IconButton edge="end" aria-label="delete">
                     <DeleteIcon />
                 </IconButton>

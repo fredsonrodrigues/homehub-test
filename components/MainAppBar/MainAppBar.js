@@ -28,6 +28,7 @@ export default function MainAppBar() {
                 </Link>
                 <div>
                     <IconButton
+                        data-testid="app-mainappbar-menu"
                         aria-label="account of current user"
                         aria-controls="menu-appbar"
                         aria-haspopup="true"

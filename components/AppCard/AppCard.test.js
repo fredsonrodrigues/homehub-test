@@ -1,11 +1,18 @@
 import React from 'react';
-import { render } from '@testing-library/react'
-import AppCard from './AppCard'
-import breed from '../../mocks/81.json'
+import { render, fireEvent } from '@testing-library/react';
+import AppCard from './AppCard';
+import breed from '../../mocks/81.json';
+
+const mockPush = jest.fn();
+jest.mock('next/router', () => ({
+    useRouter: jest.fn().mockImplementation(() => ({
+        push: mockPush
+    })),
+}));
 
 describe('testing AppCard Component', () => {
     const setup = (props) => {
-        const utils = render(<AppCard breed={breed} {...props}/>)
+        const utils = render(<AppCard breed={breed} {...props} />)
         return utils
     }
 
@@ -29,5 +36,12 @@ describe('testing AppCard Component', () => {
         const { queryByTestId } = setup({ full: true });
         expect(queryByTestId("app-card-details")).toBeTruthy();
         expect(queryByTestId("app-card-adopt-button")).toBeTruthy();
+    });
+
+    test('returns right action when click card', async () => {
+        const { getByTestId } = setup();
+        const elementToClick = getByTestId("app-card-action");
+        fireEvent.click(elementToClick);
+        expect(mockPush).toHaveBeenCalledTimes(1);
     });
 })
